@@ -1,0 +1,15 @@
+buildscript {
+    ext.kotlin_version = '1.7.20'
+    ext.hilt_version = '2.44.2'
+    ext.compose_version = '1.4.0'
+    ext.nav_version = '2.5.3'
+    repositories {
+        google()
+        mavenCentral()
+    }
+    dependencies {
+        classpath 'com.android.tools.build:gradle:8.0.1'
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
+        classpath 'com.google.dagger:hilt-android-gradle-plugin:2.45'
+    }
+}

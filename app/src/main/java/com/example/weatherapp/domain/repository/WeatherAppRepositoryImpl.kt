@@ -15,8 +15,8 @@ class WeatherAppRepositoryImpl @Inject constructor(
     private val api: WeatherAppApi,
     @IoDispatcher private val ioDispatcher: CoroutineDispatcher
 ) : WeatherAppRepository {
-    override suspend fun getWeatherInCity(API_KEY: String, city: String): Weather =
+    override suspend fun getWeatherInCity(API_KEY: String, coordinates: String): Weather =
         withContext(ioDispatcher) {
-            api.getCityWeather(API_KEY, city).toWeather()
+            api.getCityWeather(API_KEY, coordinates).toWeather()
         }
 }

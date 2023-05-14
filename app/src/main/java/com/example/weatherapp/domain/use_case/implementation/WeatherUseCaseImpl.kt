@@ -10,5 +10,9 @@ import javax.inject.Singleton
 class WeatherUseCaseImpl @Inject constructor(
     private val repository: WeatherAppRepositoryImpl
 ) : WeatherUseCase {
-    override suspend fun getWeather(API_KEY: String, city: String): Weather = repository.getWeatherInCity(API_KEY, city)
+    override suspend fun getWeather(API_KEY: String, lat: Double, lon: Double): Weather {
+        val coordinates = "${lat},${lon}"
+        return repository.getWeatherInCity(API_KEY, coordinates)
+    }
+
 }

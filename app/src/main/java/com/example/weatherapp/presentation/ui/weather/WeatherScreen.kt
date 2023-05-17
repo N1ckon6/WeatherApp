@@ -12,14 +12,17 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationCallback
@@ -89,13 +92,44 @@ private fun startLocationUpdates(
 @Composable
 fun WeatherScreenContent(modifier: Modifier, state: WeatherState) {
     Column(
-        modifier = modifier
+        modifier = modifier.fillMaxSize()
     ) {
-        state.weather?.location?.let {
-            Text(text = it.name)
-        }
+            Text(
+                text = state.weather?.location?.name.toString(),
+                modifier = Modifier.align(Alignment.CenterHorizontally),
+                color = Color.Black,
+                fontSize = 32.sp
+            )
         Spacer(modifier = Modifier.height(24.dp))
-        Text(text = state.weather?.current?.temp_c.toString())
+        Text(
+            text = "Local temperature: ${state.weather?.current?.temp_c.toString()}",
+            modifier = Modifier
+                .align(Alignment.Start)
+                .padding(horizontal = 12.dp)
+            ,
+            color = Color.Blue,
+            fontSize = 16.sp
+        )
+        Spacer(modifier = Modifier.height(24.dp))
+        Text(
+            text = "Local cloud: ${state.weather?.current?.cloud}",
+            modifier = Modifier
+                .align(Alignment.Start)
+                .padding(horizontal = 12.dp)
+            ,
+            color = Color.Blue,
+            fontSize = 16.sp
+        )
+        Spacer(modifier = Modifier.height(24.dp))
+        Text(
+            text = "Temperature feels like: ${state.weather?.current?.feelslike_c}",
+            modifier = Modifier
+                .align(Alignment.Start)
+                .padding(horizontal = 12.dp)
+            ,
+            color = Color.Blue,
+            fontSize = 16.sp
+        )
     }
 }
 
@@ -105,7 +139,7 @@ fun WeatherScreenPreview() {
     WeatherScreenContent(
         modifier = Modifier
             .fillMaxSize()
-            .background(Color.Magenta),
+            .background(Color.White),
         state = WeatherState()
     )
 }
